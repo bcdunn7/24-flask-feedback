@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{user.username}}{% endblock %}
+
+{% block content %} 
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h2 class="display-2 text-center">{{user.username}}</h2>
+
+        <p>Name: {{user.first_name}} {{user.last_name}}</p>
+        <p>Email: {{user.email}}</p>
+
+        <div class="container">
+            {% if user_feedback %}
+                {% for feedback in user_feedback %}
+
+                <div class="card m-3">
+                    <div class="card-body">
+                        <div class="card-title text-primary">
+                            {{feedback.title}}   
+                            {% if user.username == session_user %}
+                            <a href="/feedback/{{feedback.id}}/update" class="text-danger text-decoration-none">Edit</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-text">{{feedback.content}}</div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            {% else %}
+                <p>No feedback to display.</p>
+            {% endif %}
+            {% if user.username == session_user %}
+            <form action="/users/{{user.username}}/feedback/add">
+                <button class="btn btn-info">Add Feedback</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

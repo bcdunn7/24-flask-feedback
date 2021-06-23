@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Feedback{% endblock %}</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center bg-primary shadow">
+            <div class="col-auto">
+                <div class="display-1 text-light">Feedback Center</div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto m-4">
+                {% for msg in get_flashed_messages() %}
+                <div class="alert alert-info">{{ msg }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
